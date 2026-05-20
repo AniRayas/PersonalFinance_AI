@@ -1,0 +1,236 @@
+{% extends "base.html" %}
+
+{% block title %}Transactions | AuraFinance{% endblock %}
+
+{% block content %}
+<div class="row align-items-center mb-4 animate-fade-in">
+    <div class="col-md-6">
+        <h1 class="font-space-grotesk fw-bold mb-1">Transactions Ledger</h1>
+        <p class="text-secondary">Log, edit, and review your financial operations.</p>
+    </div>
+    <div class="col-md-6 d-flex justify-content-md-end justify-content-start">
+        <button class="btn btn-premium px-4 py-2.5 rounded-pill shadow-sm" data-bs-toggle="modal" data-bs-target="#addTransactionModal">
+            <i class="fa-solid fa-plus me-1"></i> Add Transaction
+        </button>
+    </div>
+</div>
+
+<!-- Ledger Controls (Filters) -->
+<div class="glass-card mb-4 animate-fade-in" style="animation-delay: 0.1s;">
+    <div class="row g-3">
+        <!-- Filter by Type -->
+        <div class="col-md-4 col-sm-6">
+            <label for="filter-type" class="form-label text-secondary fs-7 fw-500">Filter Type</label>
+            <select id="filter-type" class="form-select form-select-glass">
+                <option value="">All Types</option>
+                <option value="income">Income Only</option>
+                <option value="expense">Expense Only</option>
+            </select>
+        </div>
+        
+        <!-- Filter by Category -->
+        <div class="col-md-4 col-sm-6">
+            <label for="filter-category" class="form-label text-secondary fs-7 fw-500">Filter Category</label>
+            <select id="filter-category" class="form-select form-select-glass">
+                <option value="">All Categories</option>
+                <option value="Food">Food</option>
+                <option value="Travel">Travel</option>
+                <option value="Rent">Rent</option>
+                <option value="Shopping">Shopping</option>
+                <option value="Entertainment">Entertainment</option>
+            </select>
+        </div>
+
+        <!-- Reset Button -->
+        <div class="col-md-4 col-12 d-flex align-items-end">
+            <button id="btn-reset-filters" class="btn btn-secondary-custom w-100 py-2 rounded-3">
+                <i class="fa-solid fa-arrow-rotate-left me-1"></i> Reset Filters
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Ledger Table -->
+<div class="glass-card p-0 overflow-hidden animate-fade-in" style="animation-delay: 0.2s;">
+    <div class="custom-table-container">
+        <div class="table-responsive">
+            <table class="table custom-table align-middle">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>Category</th>
+                        <th>Description</th>
+                        <th class="text-end">Amount</th>
+                        <th class="text-center" style="width: 100px;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="transactions-table-body">
+                    <!-- Loaded dynamically via JS -->
+                </tbody>
+            </table>
+        </div>
+        <!-- Table empty state -->
+        <div id="table-empty-state" class="py-5 text-center d-none">
+            <i class="fa-solid fa-receipt fa-3x mb-3 text-muted"></i>
+            <h5 class="text-secondary mb-1 font-space-grotesk">No Transactions Found</h5>
+            <p class="text-muted mb-0">Record some transactions to start analyzing your funds!</p>
+        </div>
+    </div>
+</div>
+
+<!-- Add Transaction Modal -->
+<div class="modal fade glass-modal" id="addTransactionModal" tabindex="-1" aria-labelledby="addTransactionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title font-space-grotesk" id="addTransactionModalLabel">
+                    <i class="fa-solid fa-circle-plus text-accent me-1"></i> Add Transaction
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="add-transaction-form">
+                <div class="modal-body">
+                    <!-- Validation Errors Banner -->
+                    <div id="add-form-errors" class="alert alert-danger d-none py-2 px-3 mb-3 border-0 rounded-3" style="background-color: rgba(244, 63, 94, 0.15); color: #f43f5e; font-size: 0.85rem;"></div>
+
+                    <div class="row g-3">
+                        <!-- Transaction Type -->
+                        <div class="col-md-6">
+                            <label for="add-type" class="form-label text-secondary">Type</label>
+                            <select id="add-type" name="type" class="form-select form-select-glass" required>
+                                <option value="expense">Expense</option>
+                                <option value="income">Income</option>
+                            </select>
+                        </div>
+
+                        <!-- Amount -->
+                        <div class="col-md-6">
+                            <label for="add-amount" class="form-label text-secondary">Amount (₹)</label>
+                            <input type="number" step="0.01" min="0.01" id="add-amount" name="amount" class="form-control form-control-glass font-space-grotesk" placeholder="0.00" required>
+                        </div>
+
+                        <!-- Category -->
+                        <div class="col-lg-12">
+                            <label for="add-category" class="form-label text-secondary">Category</label>
+                            <select id="add-category" name="category" class="form-select form-select-glass" required>
+                                <option value="Food">Food</option>
+                                <option value="Travel">Travel</option>
+                                <option value="Rent">Rent</option>
+                                <option value="Shopping">Shopping</option>
+                                <option value="Entertainment">Entertainment</option>
+                            </select>
+                        </div>
+
+                        <!-- Date -->
+                        <div class="col-lg-12">
+                            <label for="add-date" class="form-label text-secondary">Date</label>
+                            <input type="date" id="add-date" name="date" class="form-control form-control-glass font-space-grotesk" required>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="col-lg-12">
+                            <label for="add-description" class="form-label text-secondary">Description</label>
+                            <input type="text" id="add-description" name="description" class="form-control form-control-glass" placeholder="e.g. Starbucks, Groceries, Salary">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary-custom px-3 py-2" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-premium px-4 py-2">Create Record</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Transaction Modal -->
+<div class="modal fade glass-modal" id="editTransactionModal" tabindex="-1" aria-labelledby="editTransactionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title font-space-grotesk" id="editTransactionModalLabel">
+                    <i class="fa-solid fa-pen-to-square text-accent me-1"></i> Edit Transaction
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form id="edit-transaction-form">
+                <input type="hidden" id="edit-id" name="id">
+                <div class="modal-body">
+                    <!-- Validation Errors Banner -->
+                    <div id="edit-form-errors" class="alert alert-danger d-none py-2 px-3 mb-3 border-0 rounded-3" style="background-color: rgba(244, 63, 94, 0.15); color: #f43f5e; font-size: 0.85rem;"></div>
+
+                    <div class="row g-3">
+                        <!-- Transaction Type -->
+                        <div class="col-md-6">
+                            <label for="edit-type" class="form-label text-secondary">Type</label>
+                            <select id="edit-type" name="type" class="form-select form-select-glass" required>
+                                <option value="expense">Expense</option>
+                                <option value="income">Income</option>
+                            </select>
+                        </div>
+
+                        <!-- Amount -->
+                        <div class="col-md-6">
+                            <label for="edit-amount" class="form-label text-secondary">Amount (₹)</label>
+                            <input type="number" step="0.01" min="0.01" id="edit-amount" name="amount" class="form-control form-control-glass font-space-grotesk" required>
+                        </div>
+
+                        <!-- Category -->
+                        <div class="col-lg-12">
+                            <label for="edit-category" class="form-label text-secondary">Category</label>
+                            <select id="edit-category" name="category" class="form-select form-select-glass" required>
+                                <option value="Food">Food</option>
+                                <option value="Travel">Travel</option>
+                                <option value="Rent">Rent</option>
+                                <option value="Shopping">Shopping</option>
+                                <option value="Entertainment">Entertainment</option>
+                            </select>
+                        </div>
+
+                        <!-- Date -->
+                        <div class="col-lg-12">
+                            <label for="edit-date" class="form-label text-secondary">Date</label>
+                            <input type="date" id="edit-date" name="date" class="form-control form-control-glass font-space-grotesk" required>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="col-lg-12">
+                            <label for="edit-description" class="form-label text-secondary">Description</label>
+                            <input type="text" id="edit-description" name="description" class="form-control form-control-glass">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary-custom px-3 py-2" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-premium px-4 py-2">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade glass-modal" id="deleteTransactionModal" tabindex="-1" aria-labelledby="deleteTransactionModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content text-center">
+            <div class="modal-header border-0 pb-0 justify-content-center">
+                <h5 class="modal-title font-space-grotesk text-danger mt-3" id="deleteTransactionModalLabel">
+                    <i class="fa-solid fa-circle-exclamation fa-2x mb-2 d-block"></i> Confirm Deletion
+                </h5>
+            </div>
+            <div class="modal-body py-3">
+                <p class="text-secondary mb-0">Are you sure you want to permanently delete this transaction record?</p>
+                <div class="p-3 my-3 rounded-3" style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-color)">
+                    <span id="delete-details-desc" class="fw-bold d-block text-truncate"></span>
+                    <span id="delete-details-amount" class="font-space-grotesk fs-5 d-block mt-1"></span>
+                </div>
+            </div>
+            <div class="modal-footer border-0 pt-0 justify-content-center gap-2 mb-3">
+                <button type="button" class="btn btn-secondary-custom px-3 py-2" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" id="btn-confirm-delete" class="btn btn-premium px-4 py-2" style="background: linear-gradient(135deg, #f43f5e, #e11d48); box-shadow: 0 4px 15px rgba(244, 63, 94, 0.25);">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

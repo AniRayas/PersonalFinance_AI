@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard | AuraFinance{% endblock %}
+
+{% block content %}
+<div class="row align-items-center mb-4 animate-fade-in">
+    <div class="col-md-6">
+        <h1 class="font-space-grotesk fw-bold mb-1">Financial Dashboard</h1>
+        <p class="text-secondary">Real-time tracker, analytics, and AI insights.</p>
+    </div>
+    <div class="col-md-6 d-flex justify-content-md-end justify-content-start align-items-center gap-3">
+        <label for="month-filter" class="text-secondary font-space-grotesk mb-0 d-none d-sm-block">Select Month:</label>
+        <input type="month" id="month-filter" class="form-control form-control-glass w-auto font-space-grotesk" value="">
+    </div>
+</div>
+
+<!-- Metrics Cards Section -->
+<div class="row g-4 mb-5 animate-fade-in" style="animation-delay: 0.1s;">
+    <!-- All-Time Net Balance -->
+    <div class="col-xl-3 col-sm-6">
+        <div class="glass-card metric-card">
+            <div class="metric-header">
+                <span>ALL-TIME BALANCE</span>
+                <div class="metric-icon balance">
+                    <i class="fa-solid fa-scale-balanced"></i>
+                </div>
+            </div>
+            <div class="metric-value font-space-grotesk text-balance" id="metric-balance">$0.00</div>
+        </div>
+    </div>
+    
+    <!-- Monthly Income -->
+    <div class="col-xl-3 col-sm-6">
+        <div class="glass-card metric-card">
+            <div class="metric-header">
+                <span>MONTHLY INCOME</span>
+                <div class="metric-icon income">
+                    <i class="fa-solid fa-arrow-down-long"></i>
+                </div>
+            </div>
+            <div class="metric-value font-space-grotesk text-income" id="metric-income">$0.00</div>
+        </div>
+    </div>
+    
+    <!-- Monthly Expenses -->
+    <div class="col-xl-3 col-sm-6">
+        <div class="glass-card metric-card">
+            <div class="metric-header">
+                <span>MONTHLY EXPENSES</span>
+                <div class="metric-icon expense">
+                    <i class="fa-solid fa-arrow-up-long"></i>
+                </div>
+            </div>
+            <div class="metric-value font-space-grotesk text-expense" id="metric-expense">$0.00</div>
+        </div>
+    </div>
+    
+    <!-- Monthly Savings -->
+    <div class="col-xl-3 col-sm-6">
+        <div class="glass-card metric-card">
+            <div class="metric-header">
+                <span>MONTHLY SAVINGS</span>
+                <div class="metric-icon savings">
+                    <i class="fa-solid fa-piggy-bank"></i>
+                </div>
+            </div>
+            <div class="metric-value font-space-grotesk text-savings" id="metric-savings">$0.00</div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4 mb-5">
+    <!-- Chart Column: Category Breakdown -->
+    <div class="col-lg-5 animate-fade-in" style="animation-delay: 0.2s;">
+        <div class="glass-card h-100">
+            <h4 class="font-space-grotesk mb-4">Category Breakdown</h4>
+            <div class="chart-container d-flex justify-content-center align-items-center" style="position: relative; height: 260px;">
+                <canvas id="categoryChart"></canvas>
+                <!-- Rendered when there is no expense data -->
+                <div id="no-chart-data" class="text-secondary text-center d-none" style="position: absolute;">
+                    <i class="fa-solid fa-chart-pie fa-2x mb-2 text-muted"></i>
+                    <p class="mb-0">No expenses recorded for this month.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Chart Column: Historical Progress -->
+    <div class="col-lg-7 animate-fade-in" style="animation-delay: 0.2s;">
+        <div class="glass-card h-100">
+            <h4 class="font-space-grotesk mb-4">Monthly Income vs Expenses</h4>
+            <div class="chart-container" style="position: relative; height: 260px; width: 100%;">
+                <canvas id="historyChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- AI Financial Insights -->
+<div class="row animate-fade-in" style="animation-delay: 0.3s;">
+    <div class="col-12">
+        <div class="glass-card ai-insights-card">
+            <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
+                <div class="d-flex align-items-center gap-2">
+                    <span class="badge ai-header-badge py-2 px-3">
+                        <i class="fa-solid fa-microchip-ai fa-fade me-1"></i> AI Insights Engine
+                    </span>
+                    <h4 class="font-space-grotesk m-0">Personalized Insights</h4>
+                </div>
+                <div id="fallback-badge-container" class="d-none">
+                    <span class="fallback-notice">
+                        <i class="fa-solid fa-circle-info me-1"></i> Heuristic Mode Active (Add OpenAI Key for advanced AI)
+                    </span>
+                </div>
+            </div>
+            
+            <div id="insights-loading" class="py-4">
+                <div class="wave-loader">
+                    <div class="wave-dot"></div>
+                    <div class="wave-dot"></div>
+                    <div class="wave-dot"></div>
+                </div>
+                <p class="text-center text-secondary font-space-grotesk mt-2">Analyzing financial trends...</p>
+            </div>
+            
+            <div id="insights-container" class="d-none">
+                <!-- Bullet points populated dynamically by JS -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,27 @@
+# Virtual environment folders
+venv/
+.venv/
+env/
+
+# Python caching files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Local SQLite databases
+*.db
+*.sqlite3
+
+# Environment variables and API keys
+.env
+.env.local
+
+# IDE configurations
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
