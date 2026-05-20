@@ -1,164 +1,123 @@
-# AuraFinance - AI Personal Finance Dashboard
+# 🌌 AuraFinance — AI-Powered Personal Finance Dashboard
 
-A simple, visually clean, and modern AI-powered Personal Finance Dashboard designed specifically for CSE academic coursework. This application helps users record transactions, visually analyze monthly expenses, and receive intelligent financial warnings and tips based on their spending behavior.
+[![Python Version](https://img.shields.io/badge/python-3.8%2B-blue?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![Flask Version](https://img.shields.io/badge/flask-3.0.3-violet?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
+[![SQLite](https://img.shields.io/badge/sqlite-3.x-lightgrey?style=for-the-badge&logo=sqlite&logoColor=white)](https://www.sqlite.org/)
+[![OpenAI GPT-4o-mini](https://img.shields.io/badge/openai-gpt--4o--mini-brightgreen?style=for-the-badge&logo=openai&logoColor=white)](https://openai.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
----
-
-## 🌟 Key Features
-
-1. **Transaction Management (CRUD)**: Log, edit, and delete income and expenses manually with ease.
-2. **Interactive Charting**:
-   - **Category Breakdown**: A Doughnut Chart (Chart.js) detailing spending across main categories: *Food, Travel, Rent, Shopping, and Entertainment*.
-   - **Historical Summary**: A multi-bar chart comparing Income vs. Expense aggregates over the last 6 months.
-3. **Smart Metrics**: Cards showing *All-Time Balance*, *Monthly Income*, *Monthly Expenses*, and *Net Monthly Savings*.
-4. **AI-Powered Financial Insights**:
-   - Generates personalized recommendations (e.g., spending increases, budget warnings, category audits).
-   - **Graceful Fallback Heuristic**: If no OpenAI API Key is configured, the backend automatically launches a rule-based algorithm to produce insights based on financial parameters.
-5. **Modern Aesthetics**: Sleek dark mode using a custom glassmorphism design system (`backdrop-filter` styles, neon gradients, and clean responsive grids).
+AuraFinance is a premium, visually clean, and modern personal finance tracker designed for students and young adults. Powered by a Flask backend and a responsive glassmorphic frontend UI, AuraFinance tracks income and expenses, visualizes monthly analytics using interactive Chart.js modules, and delivers intelligent financial advice through a hybrid AI Insights engine.
 
 ---
 
-## 📂 Project Structure
+## ✨ Features
+
+- **📊 Interactive Analytics**: Real-time category-wise spending distribution (Doughnut charts) and 6-month historical income vs. expense progress (Bar charts) powered by **Chart.js**.
+- **💳 Complete CRUD Ledger**: Add, edit, and delete transactions with immediate frontend updates and input validation.
+- **🤖 Hybrid AI Insights Engine**:
+  - **OpenAI GPT-4o-mini Mode**: Generates personalized, friendly, and actionable budgeting tips based on monthly cash flows.
+  - **Local Heuristics Fallback**: Evaluates spending patterns locally using rule-based metrics (savings rates, deficit alerts, categories) when no API key is set.
+- **🎨 Glassmorphic Interface**: A dark, premium aesthetic using modern CSS blur backdrops, gradient glows, clean typography (Outfit & Plus Jakarta Sans), and smooth micro-animations.
+- **📱 Responsive Layout**: Fully optimized for mobile, tablet, and desktop viewports.
+
+---
+
+## 🛠️ Tech Stack & Architecture
+
+- **Backend**: Python 3, Flask framework (REST APIs)
+- **Database**: SQLite3 (relational database with automatic schema initialization)
+- **Frontend**: Vanilla HTML5, Premium CSS3 Glassmorphism, Bootstrap 5 (modals and base grids)
+- **Analytics**: Chart.js (interactive client-side charting)
+- **AI Integrations**: OpenAI API (v1.x Client) with local rule-based heuristic analyzers
+
+---
+
+## 📁 Repository Structure
 
 ```
 personal_finance_dashboard/
-│
-├── app.py                  # Flask web controller & API routes
-├── database.py             # SQLite helper methods for CRUD & analytics
-├── schema.sql              # Table schema creation scripts
-├── requirements.txt        # Python package dependency list
-├── README.md               # Setup, running, and deployment guides
-│
+├── app.py                  # Server controller & API endpoints
+├── database.py             # SQLite interface & query aggregation helpers
+├── schema.sql              # Database table schema definition
+├── requirements.txt        # Python package dependencies
+├── .gitignore              # Files excluded from version control
+├── README.md               # Product documentation
 ├── templates/
-│   ├── base.html           # Main template with layout structure and navigation
-│   ├── index.html          # Dashboard page (charts, summary cards, AI insights)
-│   └── transactions.html   # Transactions listing page (tables, CRUD forms)
-│
+│   ├── base.html           # Core HTML layout, navbar, & scripts load
+│   ├── index.html          # Dashboard page (Metric cards, charts, AI feed)
+│   └── transactions.html   # Ledger page (CRUD table & modal forms)
 └── static/
     ├── css/
-    │   └── style.css       # Glassmorphic dark styling & keyframe animations
+    │   └── style.css       # Premium stylesheets & keyframe animations
     └── js/
-        └── app.js          # REST integration, AJAX handling, Chart.js setups
+        └── app.js          # REST integrations, chart renderers & AJAX handlers
 ```
 
 ---
 
-## 🛢️ Database Schema
-
-The application uses an embedded **SQLite** database (`finance.db`) initialized automatically on first startup.
-
-### Transactions Table (`transactions`)
-| Column Name | Data Type | Constraints / Description |
-| :--- | :--- | :--- |
-| `id` | `INTEGER` | Primary Key, Auto-Increment |
-| `type` | `TEXT` | Checked value: `income` or `expense` |
-| `amount` | `REAL` | Greater than 0.0 (validated at backend and client) |
-| `category` | `TEXT` | Checked value: `Food`, `Travel`, `Rent`, `Shopping`, `Entertainment` |
-| `description`| `TEXT` | Optional transaction comments |
-| `date` | `TEXT` | Transaction calendar date formatted as `YYYY-MM-DD` |
-| `created_at` | `TIMESTAMP`| Automatically populated with record insertion timestamp |
-
----
-
-## 🛠️ Step-by-Step Local Setup
-
-Follow these instructions to run the application on your computer:
+## ⚙️ Quick Start Guide
 
 ### Prerequisites
-Make sure you have **Python 3.8+** installed. You can check your version in a terminal:
+Ensure you have **Python 3.8+** installed on your system.
+
+### 1. Set Up the Repository
 ```bash
-python --version
+# Clone the repository
+git clone https://github.com/AniRayas/PersonalFinance_AI.git
+cd PersonalFinance_AI
 ```
 
-### 1. Clone or Open the Workspace Directory
-Ensure all source files are placed in your working directory:
-`personal_finance_dashboard/`
-
-### 2. Set Up a Python Virtual Environment
-Creating a virtual environment ensures dependencies do not conflict with system packages:
+### 2. Configure Virtual Environment
 ```bash
 # Create virtual environment
 python -m venv venv
 
 # Activate virtual environment
-# On Windows (Command Prompt):
-venv\Scripts\activate
-# On Windows (PowerShell):
+# Windows (PowerShell):
 venv\Scripts\Activate.ps1
-# On macOS/Linux:
+# macOS/Linux:
 source venv/bin/activate
 ```
 
 ### 3. Install Dependencies
-Install all required libraries using the package manager `pip`:
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Configure Environment Variables (Optional)
-To use advanced AI insights via OpenAI, create a file named `.env` in the root folder and add your API key:
+### 4. Setup API Keys (Optional)
+If you wish to use advanced GPT insights, create a `.env` file in the root directory:
 ```env
-OPENAI_API_KEY=your-actual-api-key-here
+OPENAI_API_KEY=your_openai_api_key_here
 ```
-*Note: If you do not have an API key, leave this empty. The application will automatically fall back to rule-based insights.*
+*Note: If no `.env` file is created, the system operates seamlessly using local heuristic rules.*
 
-### 5. Launch the Server
-Start the Flask application:
+### 5. Launch Server
 ```bash
 python app.py
 ```
-You should see:
-```text
-Database initialized successfully.
- * Serving Flask app 'app'
- * Debug mode: on
- * Running on http://127.0.0.1:5000
-```
-Open [http://127.0.0.1:5000](http://127.0.0.1:5000) in your web browser to access the dashboard!
+Open **[http://127.0.0.1:5000](http://127.0.0.1:5000)** in your browser to start tracking!
 
 ---
 
 ## 💡 AI Insights Logic
 
-- **OpenAI Mode**: Send prompt containing the user's current month details (income, expenses, category spending breakdown) and the previous month's figures. Ask `gpt-4o-mini` to provide 3-4 friendly, concise financial tips or warnings tailored to college students.
-- **Rule Heuristic Mode**: If `OPENAI_API_KEY` is not found, the app evaluates rules:
-  1. *Deficit Alert*: If expenses exceed income.
-  2. *Savings Rate Check*: Encourages user if savings rate is >20%, warns if savings rate is low.
-  3. *Monthly Delta*: Reports if expenses increased or decreased by more than 5% compared to the prior month.
-  4. *Top Expense Analyzer*: Identifies the highest spending category, and triggers category-specific budget tips (e.g. food prep recommendations for Food, public transport ideas for Travel, etc.).
+AuraFinance employs a two-tier analyzer to process transaction history:
+1. **GPT Mode**: Encapsulates monthly income, category spending ratios, and historical margins. It prompts `gpt-4o-mini` to return tailored, bulleted advice suited for college budgets.
+2. **Local Heuristics**: Analyzes factors such as:
+   - **Savings Rates**: Alerts if savings rate falls below 20% of income.
+   - **Budget Deficits**: Fires alerts if expenses exceed earnings.
+   - **Historical Comparison**: Flags spending changes greater than 5% compared to the prior month.
+   - **Top Expense Audits**: Targets category outliers (e.g. Shopping/Food) and delivers behavioral suggestions.
 
 ---
 
-## 🚀 Deployment Instructions
+## 🔒 Security Practices
 
-When ready to show your project, you can deploy it to public hosting platforms:
+- **API Keys**: Stored securely in `.env` variables and excluded from Git using `.gitignore`.
+- **Database File**: The database file `finance.db` is stored locally and git-ignored to prevent pushing sensitive personal records.
 
-### Option A: Deploy to Render.com (Recommended for beginners)
-Render is a cloud hosting provider with free tiers for web services.
-1. Create a `gunicorn` configuration by installing it in your venv: `pip install gunicorn` and adding it to `requirements.txt`.
-2. Push your project code to a public/private GitHub repository.
-3. Sign up at [Render.com](https://render.com) and create a new **Web Service**.
-4. Connect your GitHub repository.
-5. Configure the service settings:
-   - **Environment**: `Python`
-   - **Build Command**: `pip install -r requirements.txt`
-   - **Start Command**: `gunicorn app:app`
-6. Under Environment variables, add `OPENAI_API_KEY` if desired.
-7. Click **Deploy**. Render will host your Flask server and SQLite database!
-   *(Note: SQLite databases on Render's free tier are reset when the service spins down. For persistent storage on cloud servers, consider configuring PostgreSQL).*
+---
 
-### Option B: Deploy to PythonAnywhere
-PythonAnywhere specializes in hosting Python applications.
-1. Sign up for a free account at [PythonAnywhere](https://www.pythonanywhere.com).
-2. Go to the **Files** tab and upload your project zip, or use the **Consoles** tab to clone your Git repository.
-3. Go to the **Web** tab and click **Add a new web app**. Choose **Manual Configuration** and choose your Python version.
-4. Set up a Virtualenv path in the Web configurations and run a console to run `pip install -r requirements.txt`.
-5. Edit your WSGI file (linked on the Web tab) to point to your project directory and load your Flask app:
-   ```python
-   import sys
-   path = '/home/username/personal_finance_dashboard'
-   if path not in sys.path:
-       sys.path.insert(0, path)
-   from app import app as application
-   ```
-6. Reload the web app, and it will be live at `http://username.pythonanywhere.com`!
+## 📜 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
