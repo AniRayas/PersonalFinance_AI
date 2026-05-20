@@ -13,8 +13,6 @@ AuraFinance is a premium, visually clean, and modern personal finance tracker de
 - **🤖 Hybrid AI Insights Engine**:
   - **OpenAI GPT-4o-mini Mode**: Generates personalized, friendly, and actionable budgeting tips based on monthly cash flows.
   - **Local Heuristics Fallback**: Evaluates spending patterns locally using rule-based metrics (savings rates, deficit alerts, categories) when no API key is set.
-- **🎨 Premium UI**: A dark, sleek aesthetic using gradient glows, clean typography (Outfit & Plus Jakarta Sans), and smooth micro-animations.
-- **📱 Responsive Layout**: Fully optimized for mobile, tablet, and desktop viewports.
 
 ---
 
