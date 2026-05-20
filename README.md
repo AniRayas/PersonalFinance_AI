@@ -2,7 +2,7 @@
 
 
 
-AuraFinance is a premium, visually clean, and modern personal finance tracker designed for students and young adults. Powered by a Flask backend and a responsive glassmorphic frontend UI, AuraFinance tracks income and expenses, visualizes monthly analytics using interactive Chart.js modules, and delivers intelligent financial advice through a hybrid AI Insights engine.
+AuraFinance is a premium, visually clean, and modern personal finance tracker designed for students and young adults. Powered by a Flask backend and a responsive frontend UI, AuraFinance tracks income and expenses, visualizes monthly analytics using interactive Chart.js modules, and delivers intelligent financial advice through a hybrid AI Insights engine.
 
 ---
 
@@ -13,7 +13,7 @@ AuraFinance is a premium, visually clean, and modern personal finance tracker de
 - **🤖 Hybrid AI Insights Engine**:
   - **OpenAI GPT-4o-mini Mode**: Generates personalized, friendly, and actionable budgeting tips based on monthly cash flows.
   - **Local Heuristics Fallback**: Evaluates spending patterns locally using rule-based metrics (savings rates, deficit alerts, categories) when no API key is set.
-- **🎨 Glassmorphic Interface**: A dark, premium aesthetic using modern CSS blur backdrops, gradient glows, clean typography (Outfit & Plus Jakarta Sans), and smooth micro-animations.
+- **🎨 Premium UI**: A dark, sleek aesthetic using gradient glows, clean typography (Outfit & Plus Jakarta Sans), and smooth micro-animations.
 - **📱 Responsive Layout**: Fully optimized for mobile, tablet, and desktop viewports.
 
 ---
@@ -22,7 +22,7 @@ AuraFinance is a premium, visually clean, and modern personal finance tracker de
 
 - **Backend**: Python 3, Flask framework (REST APIs)
 - **Database**: SQLite3 (relational database with automatic schema initialization)
-- **Frontend**: Vanilla HTML5, Premium CSS3 Glassmorphism, Bootstrap 5 (modals and base grids)
+- **Frontend**: Vanilla HTML5, custom CSS3, Bootstrap 5 (modals and base grids)
 - **Analytics**: Chart.js (interactive client-side charting)
 - **AI Integrations**: OpenAI API (v1.x Client) with local rule-based heuristic analyzers
 
