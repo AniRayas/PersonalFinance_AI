@@ -1,6 +1,5 @@
 # 🌌 AuraFinance — AI-Powered Personal Finance Dashboard
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
 
 AuraFinance is a premium, visually clean, and modern personal finance tracker designed for students and young adults. Powered by a Flask backend and a responsive glassmorphic frontend UI, AuraFinance tracks income and expenses, visualizes monthly analytics using interactive Chart.js modules, and delivers intelligent financial advice through a hybrid AI Insights engine.
@@ -113,8 +112,4 @@ AuraFinance employs a two-tier analyzer to process transaction history:
 - **API Keys**: Stored securely in `.env` variables and excluded from Git using `.gitignore`.
 - **Database File**: The database file `finance.db` is stored locally and git-ignored to prevent pushing sensitive personal records.
 
----
 
-## 📜 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
