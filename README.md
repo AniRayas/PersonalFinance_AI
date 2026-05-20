@@ -1,10 +1,7 @@
 # 🌌 AuraFinance — AI-Powered Personal Finance Dashboard
 
-[![Python Version](https://img.shields.io/badge/python-3.8%2B-blue?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
-[![Flask Version](https://img.shields.io/badge/flask-3.0.3-violet?style=for-the-badge&logo=flask&logoColor=white)](https://flask.palletsprojects.com/)
-[![SQLite](https://img.shields.io/badge/sqlite-3.x-lightgrey?style=for-the-badge&logo=sqlite&logoColor=white)](https://www.sqlite.org/)
-[![OpenAI GPT-4o-mini](https://img.shields.io/badge/openai-gpt--4o--mini-brightgreen?style=for-the-badge&logo=openai&logoColor=white)](https://openai.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
+
 
 AuraFinance is a premium, visually clean, and modern personal finance tracker designed for students and young adults. Powered by a Flask backend and a responsive glassmorphic frontend UI, AuraFinance tracks income and expenses, visualizes monthly analytics using interactive Chart.js modules, and delivers intelligent financial advice through a hybrid AI Insights engine.
 
@@ -58,7 +55,7 @@ personal_finance_dashboard/
 ## ⚙️ Quick Start Guide
 
 ### Prerequisites
-Ensure you have **Python 3.8+** installed on your system.
+Ensure you have **Python** installed on your system.
 
 ### 1. Set Up the Repository
 ```bash
@@ -102,7 +99,7 @@ Open **[http://127.0.0.1:5000](http://127.0.0.1:5000)** in your browser to start
 ## 💡 AI Insights Logic
 
 AuraFinance employs a two-tier analyzer to process transaction history:
-1. **GPT Mode**: Encapsulates monthly income, category spending ratios, and historical margins. It prompts `gpt-4o-mini` to return tailored, bulleted advice suited for college budgets.
+1. **GPT Mode**: Encapsulates monthly income, category spending ratios, and historical margins. It prompts the AI model to return tailored, bulleted advice suited for college budgets.
 2. **Local Heuristics**: Analyzes factors such as:
    - **Savings Rates**: Alerts if savings rate falls below 20% of income.
    - **Budget Deficits**: Fires alerts if expenses exceed earnings.
